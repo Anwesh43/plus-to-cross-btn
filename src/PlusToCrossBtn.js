@@ -18,8 +18,8 @@ const Presentational = ({scale, w, h, onClick}) => {
     </div>
 }
 
-const PlusToCrossBtn = (props) => {
-    const {scale, start} = useAnimatedScale(0.02, 20)
+const PlusToCrossBtn = ({delay, speed}) => {
+    const {scale, start} = useAnimatedScale(speed, delay)
     const {w, h} = useDimension()
 
     return (

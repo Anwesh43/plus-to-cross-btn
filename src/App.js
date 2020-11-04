@@ -5,7 +5,7 @@ import PlusToCrossBtn from './PlusToCrossBtn'
 function App() {
   return (
     <div className="App">
-        <PlusToCrossBtn/>
+        <PlusToCrossBtn delay = {12} speed = {0.02}/>
     </div>
   );
 }
