@@ -33,9 +33,68 @@ export const useDimension = () => {
         }
         return () => {
             window.onresize = () => {
-                
+
             }
         }
 
     })
+}
+
+export const useStyle = (w, h, scale) => {
+    const position = 'absolute'
+    const x = `${w / 2}px`
+    const y = `${h / 2}px`
+    const size = Math.min(w, h) / 16
+    const sf = Math.sin(scale * Math.PI)
+    return  { 
+        parentStyle() {
+            const left = x 
+            const top = y 
+            const WebkitTransfrom = `rotate(${45 * sf}deg)`
+            return { 
+                position, 
+                left, 
+                top,
+                WebkitTransform
+            }
+        },
+
+        lineStyle(i) {
+            const WebkitTransform = `rotate(${90 * i}deg)`
+            const lSize = size * 0.75
+            const thickness = Math.min(w, h) / 90
+            const width = `${thickness}px`
+            const height = `${lSize}px`
+            const top = `${-lSize / 2}px`
+            const left = `${-thickness / 2}px`
+            const background = 'white'
+            return {
+                position, 
+                width, 
+                height, 
+                left, 
+                top,
+                background,
+                WebkitTransform
+            }
+        },
+
+        circleStyle() {
+            const width = `${size}px`
+            const height = `${size}px`
+            const background = 'indigo'
+            const borderRadius = '50%'
+            const top = `${-size / 2}px`
+            const left = `${-size / 2}px`
+            return {
+                position, 
+                left, 
+                top, 
+                width,
+                height, 
+                background,
+                borderRadius
+            }
+        }
+    }
 }
