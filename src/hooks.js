@@ -12,7 +12,9 @@ export const useAnimatedScale = (scGap = 0.02, delayInMs = 20) => {
                 const intervalId = setInterval(() => {
                     currScale += scGap 
                     setScale(currScale)
-                    if (scale > 1) {
+
+                    if (currScale > 1) {
+                        console.log(scale, currScale)
                         setScale(0)
                         setAnimated(false)
                         clearInterval(intervalId)
@@ -29,7 +31,7 @@ export const useDimension = () => {
     useEffect(() => {
         window.onresize = () => {
           setW(window.innerWidth)
-          setH(winodw.innerHeight)
+          setH(window.innerHeight)
         }
         return () => {
             window.onresize = () => {
@@ -38,19 +40,23 @@ export const useDimension = () => {
         }
 
     })
+    return {
+        w, 
+        h
+    }
 }
 
 export const useStyle = (w, h, scale) => {
     const position = 'absolute'
     const x = `${w / 2}px`
     const y = `${h / 2}px`
-    const size = Math.min(w, h) / 16
+    const size = Math.min(w, h) / 6
     const sf = Math.sin(scale * Math.PI)
     return  { 
         parentStyle() {
             const left = x 
             const top = y 
-            const WebkitTransfrom = `rotate(${45 * sf}deg)`
+            const WebkitTransform = `rotate(${45 * sf}deg)`
             return { 
                 position, 
                 left, 
@@ -61,13 +67,13 @@ export const useStyle = (w, h, scale) => {
 
         lineStyle(i) {
             const WebkitTransform = `rotate(${90 * i}deg)`
-            const lSize = size * 0.75
+            const lSize = size * 0.6
             const thickness = Math.min(w, h) / 90
             const width = `${thickness}px`
             const height = `${lSize}px`
             const top = `${-lSize / 2}px`
             const left = `${-thickness / 2}px`
-            const background = 'white'
+            const background = '#E1E1E1'
             return {
                 position, 
                 width, 
