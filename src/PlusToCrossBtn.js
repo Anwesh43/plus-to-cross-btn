@@ -18,12 +18,16 @@ const Presentational = ({scale, w, h, onClick}) => {
     </div>
 }
 
-const PlusToCrossBtn = ({delay, speed}) => {
+const PlusToCrossBtn = ({delay, speed, onClick}) => {
     const {scale, start} = useAnimatedScale(speed, delay)
     const {w, h} = useDimension()
 
     return (
-        <Presentational scale = {scale} w = {w} h = {h} onClick = {start}>
+        <Presentational scale = {scale} w = {w} h = {h} onClick = {() => {
+          start(() => {
+            onClick()
+          })
+        }}>
         </Presentational>
     )
 }

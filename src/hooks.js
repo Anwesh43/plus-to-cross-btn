@@ -5,7 +5,7 @@ export const useAnimatedScale = (scGap = 0.02, delayInMs = 20) => {
     const [animated, setAnimated] = useState(false)
     return {
         scale, 
-        start() {
+        start(cb) {
             if (!animated) {
                 setAnimated(true)
                 let currScale = scale 
@@ -18,6 +18,7 @@ export const useAnimatedScale = (scGap = 0.02, delayInMs = 20) => {
                         setScale(0)
                         setAnimated(false)
                         clearInterval(intervalId)
+                        cb()
                     }
                 }, delayInMs)
             }
